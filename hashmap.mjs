@@ -22,6 +22,21 @@ class HashMap {
         }
     }
 
+    checkIfGrowth() {
+        return this.storedKeys > (this.loadFactor * this.capacity)
+    }
+
+    growth() {
+        const myEntries = this.entries();
+        this.buckets = new Array(this.capacity * 2);
+        this.capacity = this.buckets.length;
+        this.storedKeys = 0;
+
+        myEntries.forEach((pair) => {
+            this.set(pair[0], pair[1])
+        })
+    }
+
     hash(key) {
         let hashCode = 0;
 
@@ -44,11 +59,20 @@ class HashMap {
             this.storedKeys += 1;
             this.buckets[index] = bucket;
 
+            if (this.checkIfGrowth()) {
+                this.growth()
+            }
+
         } else {
             const myList = this.buckets[index];
             const addSuccess = myList.append({ key, value });
             if (addSuccess) {
                 this.storedKeys += 1;
+            }
+
+
+            if (this.checkIfGrowth()) {
+                this.growth()
             }
         }
     }
@@ -129,30 +153,4 @@ class HashMap {
 
 }
 
-const test = new HashMap()
-test.set('apple', 'red')
-test.set('banana', 'yellow')
-test.set('carrot', 'orange')
-test.set('dog', 'brown')
-test.set('elephant', 'gray')
-test.set('frog', 'green')
-test.set('grape', 'purple')
-test.set('hat', 'black')
-test.set('ice cream', 'white')
-test.set('jacket', 'blue')
-test.set('kite', 'pink')
-test.set('lion', 'golden')
-
-
-// console.log(test)
-// test.remove('apple')
-// console.log(test)
-// console.log(test.get('apple'))
-
-// console.log(test)
-// test.clear()
-// console.log(test)
-
-console.log(test.keys())
-console.log(test.values())
-console.log(test.entries())
+export { HashMap }
