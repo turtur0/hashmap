@@ -1,5 +1,6 @@
 import { HashMap } from './hashmap.mjs'
 
+// Initialise tests
 const test = new HashMap()
 test.set('apple', 'red')
 test.set('banana', 'yellow')
@@ -26,6 +27,7 @@ test.set('moon', 'silver')
 // test.clear()
 // console.log(test)
 
+// Test data fetch for keys, values, and all entires including both
 console.log(test.keys())
 console.log(test.values())
 console.log(test.entries())
