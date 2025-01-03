@@ -22,10 +22,12 @@ class HashMap {
         }
     }
 
+    // Check if bucket growth is required 
     checkIfGrowth() {
         return this.storedKeys > (this.loadFactor * this.capacity)
     }
 
+    // Double bucket capacity
     growth() {
         const myEntries = this.entries();
         this.buckets = new Array(this.capacity * 2);
@@ -37,6 +39,7 @@ class HashMap {
         })
     }
 
+    // Hashing the key function
     hash(key) {
         let hashCode = 0;
 
@@ -49,6 +52,7 @@ class HashMap {
         return hashCode;
     }
 
+    // Add a new value with a key
     set(key, value) {
         const index = this.hash(key);
 
@@ -77,6 +81,7 @@ class HashMap {
         }
     }
 
+    // Get the value with key
     get(key) {
         const index = this.hash(key);
         this.testIndex(index);
@@ -88,6 +93,7 @@ class HashMap {
         }
     }
 
+    // Remove value with key
     remove(key) {
         const index = this.hash(key);
         this.testIndex(index)
@@ -102,10 +108,12 @@ class HashMap {
         }
     }
 
+    // Return the number of keys
     length() {
         return this.storedKeys
     }
 
+    // Clear all the values and keys from the bucket
     clear() {
         this.buckets = new Array(16);
         this.storedKeys = 0;
@@ -113,6 +121,7 @@ class HashMap {
         this.capacity = this.buckets.length;
     }
 
+    // Return all the keys in an array
     keys() {
         let arr = [];
 
@@ -125,6 +134,7 @@ class HashMap {
         return arr
     }
 
+    // Return all values in an array
     values() {
         let arr = [];
 
@@ -137,6 +147,7 @@ class HashMap {
         return arr
     }
 
+    // Return all keys with their respective values
     entries() {
         let arr = [];
 
